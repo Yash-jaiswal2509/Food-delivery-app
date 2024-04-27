@@ -21,8 +21,17 @@ const StoreContextProvider = ({ children }) => {
         setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }))
     }
 
-    useEffect(() => {
-    }, [cartItems])
+    const getTotalCartValue = () => {
+
+        let total = 0;
+        for (const item in cartItems) {
+            if (cartItems[item] > 0) {
+                let itemInfo = food_list.find((product) => product._id === item);
+                total += itemInfo.price * cartItems[item];
+            }
+        }
+        return total;
+    }
 
     const contextValue = {
         // Add your global state variables and functions here
@@ -30,7 +39,8 @@ const StoreContextProvider = ({ children }) => {
         cartItems,
         setCartItems,
         addToCart,
-        removeCartItem
+        removeCartItem,
+        getTotalCartValue
     }
     return (
         <StoreContext.Provider value={contextValue}>

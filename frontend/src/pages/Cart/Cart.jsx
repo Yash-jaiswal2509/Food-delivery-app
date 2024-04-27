@@ -1,9 +1,75 @@
 import React from 'react'
 import './Cart.css'
-
+import { StoreContext } from '../../context/StoreContext'
+import { useNavigate } from 'react-router-dom';
 const Cart = () => {
+
+  const { cartItems, removeCartItem, food_list, getTotalCartValue } = React.useContext(StoreContext);
+  const navigate = useNavigate();
+
   return (
-    <div>Cart</div>
+    <div className='cart'>
+      <div className='cart-items'>
+        <div className='cart-items-title'>
+          <p>Items</p>
+          <p>Title</p>
+          <p>Price</p>
+          <p>Quantity</p>
+          <p>Total</p>
+          <p>Remove</p>
+        </div>
+      </div>
+      <br />
+      <hr />
+      {food_list.map((food, index) => {
+        if (cartItems[food._id] > 0) {
+          return (
+            <>
+              <div className='cart-items-title cart-items-item' key={index}>
+                <img src={food.image} />
+                <p>{food.name}</p>
+                <p><span>&#8377;</span> {food.price}</p>
+                <p>{cartItems[food._id]}</p>
+                <p>{food.price * cartItems[food._id]}</p>
+                <p className='cross' onClick={() => removeCartItem(food._id)}>X</p>
+              </div>
+              <hr />
+            </>
+          )
+        }
+      })}
+      <div className='cart-bottom'>
+        <div className='cart-total'>
+          <h2>Cart Total</h2>
+          <div>
+            <div className='cart-total-details'>
+              <p>Subtotal</p>
+              <p><span>&#8377;</span> {getTotalCartValue()}</p>
+            </div>
+            <hr />
+            <div className='cart-total-details'>
+              <p>Delivery Fee</p>
+              <p><span>&#8377;</span> {getTotalCartValue() === 0 ? 0 : 2}</p>
+            </div>
+            <hr />
+            <div className='cart-total-details'>
+              <b>Total</b>
+              <b><span>&#8377;</span> {getTotalCartValue() === 0 ? 0 : (2 + getTotalCartValue())}</b>
+            </div>
+          </div>
+          <button onClick={() => navigate("/order")}>Proceed to Checkout</button>
+        </div>
+        <div className='cart-promocode'>
+          <div>
+            <p>Got promo code? Use here</p>
+            <div className='cart-promocode-input'>
+              <input type='text' placeholder='Promo Code' />
+              <button>Apply</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 
