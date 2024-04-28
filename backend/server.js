@@ -20,5 +20,6 @@ app.get("/health", (req, res) => {
 
 //routes
 app.use("/api/food", foodRouter);
+app.use("/images", express.static("uploads"));
 
 app.listen(PORT, () => console.log(`Server is running on port: ${PORT}`));

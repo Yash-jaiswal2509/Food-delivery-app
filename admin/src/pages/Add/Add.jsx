@@ -6,9 +6,9 @@ import { toast } from 'react-toastify'
 
 
 
-const Add = () => {
+const Add = ({url}) => {
 
-    const url = 'http://localhost:4000';
+    const [adding, setAdding] = React.useState(false);
     const [image, setImage] = React.useState(false);
     const [data, setData] = React.useState({
         name: "",
@@ -25,6 +25,7 @@ const Add = () => {
 
     const onSubmitHandler = async (event) => {
         event.preventDefault();
+        setAdding(true)
         const formData = new FormData();
         formData.append('name', data.name);
         formData.append('description', data.description);
@@ -41,10 +42,12 @@ const Add = () => {
                 category: "Salad"
             });
             setImage(false);
+            setAdding(false);
             toast.success(response.data.message);
         }
         else {
             toast.error(response.data.message);
+            setAdding(false);
         }
     }
 
@@ -85,7 +88,7 @@ const Add = () => {
                         <input onChange={onChangeHandler} value={data.price} type="number" name='price' placeholder='₹200' />
                     </div>
                 </div>
-                <button type='submit' className='add-button'>Add Food</button>
+                <button type='submit' className='add-button'>{adding ? "Adding..." : "Add Food"}</button>
             </form>
         </div>
     )
