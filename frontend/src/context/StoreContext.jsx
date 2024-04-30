@@ -1,15 +1,15 @@
 import { createContext, useEffect, useState } from "react";
-import { food_list } from "../assets/frontend_assets/assets";
+import axios from "axios";
+
 
 export const StoreContext = createContext(null)
-
-
 
 const StoreContextProvider = ({ children }) => {
 
     const url = "http://localhost:4000"
     const [cartItems, setCartItems] = useState({})
     const [token, setToken] = useState("")
+    const [food_list, setFoodList] = useState([]);
 
     const addToCart = (itemId) => {
         if (!cartItems[itemId]) {
@@ -35,15 +35,35 @@ const StoreContextProvider = ({ children }) => {
         return total;
     }
 
+    const fetchFoodList = async () => {
+        const response = await axios.get(`${url}/api/food/list-food`);
+        setFoodList(response.data.data);
+    }
+
+
+    useEffect(() => {
+        async function loadData() {
+            await fetchFoodList();
+            if (localStorage.getItem("token")) {
+                setToken(localStorage.getItem("token"))
+            }
+        }
+        loadData();
+    }, [])
+
+
+
     const contextValue = {
         // Add your global state variables and functions here
-        food_list: food_list,
+        food_list,
         cartItems,
         setCartItems,
         addToCart,
         removeCartItem,
         getTotalCartValue,
-        url
+        url,
+        token,
+        setToken
     }
     return (
         <StoreContext.Provider value={contextValue}>
