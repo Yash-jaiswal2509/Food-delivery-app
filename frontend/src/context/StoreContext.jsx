@@ -17,10 +17,23 @@ const StoreContextProvider = ({ children }) => {
         } else {
             setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }))
         }
+        if (token) {
+            //here headers is used to authenticate the user not to allow any other user to add items to cart
+            //item id is for the food to be added to cart
+            axios.post(`${url}/api/cart/add-to-cart`, { itemId: itemId }, { headers: { token } })
+        }
     }
     //[itemId]: prev[itemId] this gives the value of cart item id
     const removeCartItem = (itemId) => {
         setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }))
+        if (token) {
+            axios.post(`${url}/api/cart/remove-from-cart`, { itemId: itemId }, { headers: { token } })
+        }
+    }
+
+    const loadCartData = async (token) => {
+        const response = await axios.post(`${url}/api/cart/get-cart`, {}, { headers: { token } });
+        setCartItems(response.data.cartData);
     }
 
     const getTotalCartValue = () => {
@@ -46,6 +59,7 @@ const StoreContextProvider = ({ children }) => {
             await fetchFoodList();
             if (localStorage.getItem("token")) {
                 setToken(localStorage.getItem("token"))
+                await loadCartData(localStorage.getItem("token"))
             }
         }
         loadData();
