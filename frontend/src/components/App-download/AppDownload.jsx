@@ -6,7 +6,7 @@ const AppDownload = () => {
     return (
         <div>
             <div className='app-download' id='app-download'>
-                <p>For Better Experience Download <br /> #ef9215 App</p>
+                <p>For Better Experience Download <br /> Khana On Wheels App</p>
                 <div className='app-download-platforms'>
                     <img src={assets.play_store} alt="" />
                     <img src={assets.app_store} alt="" />

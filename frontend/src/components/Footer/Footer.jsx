@@ -28,7 +28,7 @@ const Footer = () => {
                     <h2>GET IN TOUCH</h2>
                     <ul>
                         <li>+85-832-83-823-324</li>
-                        <li>contact@#ef9215.com</li>
+                        <li>contact@https://khana-on-wheels-food-delivery.vercel.app/</li>
                     </ul>
                 </div>
             </div>
