@@ -22,6 +22,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
+    gap: 5px;
 }
 
 .food-item-name-rating p {
