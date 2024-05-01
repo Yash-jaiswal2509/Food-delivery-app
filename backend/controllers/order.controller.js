@@ -83,7 +83,7 @@ const verifyOrder = async (req, res) => {
   }
 };
 
-//getting user orders
+//getting user orders for admin-panel
 const userOrders = async (req, res) => {
   try {
     const orders = await Order.find({ userId: req.body.userId });
@@ -94,4 +94,31 @@ const userOrders = async (req, res) => {
   }
 };
 
-export { placeOrder, verifyOrder, userOrders };
+const listOrders = async (req, res) => {
+  try {
+    const order = await Order.find({});
+    res.status(200).json({ success: true, data: order });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Error in list orders" });
+  }
+};
+
+//updating order status for admin-panel
+const updateOrderStatus = async (req, res) => {
+  try {
+    await Order.findByIdAndUpdate(req.body.orderId, {
+      status: req.body.status,
+    });
+    res
+      .status(200)
+      .json({ success: true, message: "Order status updated successfully" });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ success: false, message: "Error in update order status" });
+  }
+};
+
+export { placeOrder, verifyOrder, userOrders, listOrders, updateOrderStatus };

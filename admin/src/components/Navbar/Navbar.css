@@ -7,8 +7,10 @@
 
 .navbar .logo {
   width: max(10%, 80px);
+  cursor: pointer;
 }
 
 .navbar .profile{
     width: 40px;
+    cursor: pointer;
 }
