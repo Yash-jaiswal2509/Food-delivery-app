@@ -24,8 +24,8 @@ const Cart = () => {
       {food_list.map((food, index) => {
         if (cartItems[food._id] > 0) {
           return (
-            <>
-              <div className='cart-items-title cart-items-item' key={index}>
+            <div key={index}>
+              <div className='cart-items-title cart-items-item'>
                 <img src={url + "/images/" + food.image} />
                 <p>{food.name}</p>
                 <p><span>&#8377;</span> {food.price}</p>
@@ -34,7 +34,7 @@ const Cart = () => {
                 <p className='cross' onClick={() => removeCartItem(food._id)}>X</p>
               </div>
               <hr />
-            </>
+            </div>
           )
         }
       })}
