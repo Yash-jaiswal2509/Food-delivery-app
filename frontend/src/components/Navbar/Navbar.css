@@ -5,8 +5,18 @@
   align-items: center;
 }
 
-.navbar .logo {
-  width: 150px;
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-left .logo {
+  width: 275px;
+}
+
+.navbar-left .thumbnail {
+  height: 50px;
+  border-radius: 100%;
 }
 
 .navbar-menu {
@@ -26,7 +36,7 @@
   background: transparent;
   font-size: 16px;
   color: #49557e;
-  border: 1px solid tomato;
+  border: 1px solid #ef9215;
   padding: 10px 30px;
   border-radius: 50px;
   cursor: pointer;
@@ -34,7 +44,7 @@
 }
 
 .navbar button:hover {
-  background: tomato;
+  background: #ef9215;
   color: white;
 }
 
@@ -55,7 +65,7 @@
   position: absolute;
   min-width: 10px;
   min-height: 10px;
-  background-color: tomato;
+  background-color: #ef9215;
   border-radius: 5px;
   top: -8px;
   right: -8px;
@@ -70,7 +80,7 @@
   position: absolute;
   display: none;
   right: -55px;
-  top: 45px;
+  top: 35px;
   z-index: 1;
 }
 
@@ -81,7 +91,7 @@
   background-color: #fff2ef;
   padding: 12px 25px;
   border-radius: 4px;
-  border: 1px solid tomato;
+  border: 1px solid #ef9215;
   outline: 2px solid white;
   list-style: none;
 }
@@ -97,8 +107,8 @@
   width: 20px;
 }
 
-.navbar-profile-dropdown li:hover{
-  color: tomato;
+.navbar-profile-dropdown li:hover {
+  color: #ef9215;
 }
 
 @media (max-width: 1050px) {
@@ -121,7 +131,7 @@
 }
 
 @media (max-width: 900px) {
-  .navbar .logo {
+  .navbar-left .logo {
     width: 120px;
   }
   .navbar-menu {
@@ -141,6 +151,9 @@
 }
 
 @media (max-width: 760px) {
+  .navbar-left .logo {
+    display: none;
+  }
   .navbar-menu {
     display: none;
   }

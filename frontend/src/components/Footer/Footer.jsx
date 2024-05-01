@@ -7,8 +7,8 @@ const Footer = () => {
         <div className='footer' id='footer'>
             <div className='footer-content'>
                 <div className='footer-content-left'>
-                    <img src={assets.logo} alt="" />
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, consequuntur a blanditiis quas fugit, ab dignissimos obcaecati quae earum expedita alias ipsam recusandae incidunt reprehenderit inventore accusamus, ducimus odit culpa!</p>
+                    <img src={assets.footerLogo} className='footer-logo' alt="" />
+                    <p><b>Khana on Wheels</b> brings you the finest flavors of Indian cuisine, delivered right to your doorstep. From fresh salads to delecious deserts, we’re here to satisfy your cravings. Order now and experience the joy of delicious food on wheels!</p>
                     <div className='footer-social-icons'>
                         <img src={assets.facebook_icon} alt="" />
                         <img src={assets.twitter_icon} alt="" />
@@ -28,12 +28,12 @@ const Footer = () => {
                     <h2>GET IN TOUCH</h2>
                     <ul>
                         <li>+85-832-83-823-324</li>
-                        <li>contact@tomato.com</li>
+                        <li>contact@#ef9215.com</li>
                     </ul>
                 </div>
             </div>
             <hr />
-            <p className='footer-copyright'>Copyright 2024 <span>&copy;</span> Tomato.com - All Rights Reserved</p>
+            <p className='footer-copyright'>Copyright 2024 <span>&copy;</span> #ef9215.com - All Rights Reserved</p>
         </div>
     )
 }

@@ -17,7 +17,7 @@
   gap: 30px;
   font-size: 14px;
   color: #454545;
-  border: 1px solid tomato;
+  border: 1px solid #ef9215;
 }
 
 .my-orders-order img {
@@ -25,7 +25,7 @@
 }
 
 .my-orders-order p span {
-  color: tomato;
+  color: #ef9215;
 }
 
 .my-orders-order p b {
