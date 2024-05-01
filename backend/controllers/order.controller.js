@@ -49,8 +49,6 @@ const placeOrder = async (req, res) => {
       cancel_url: `${process.env.FRONTEND_URL}/verify-order?success=false&orderId=${order._id}`,
     });
 
-    console.log(session.url);
-
     res.status(201).json({ success: true, session_url: session.url });
   } catch (error) {
     console.log(error);
