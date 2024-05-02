@@ -8,6 +8,7 @@ import axios from 'axios';
 
 const LoginPopup = ({ setShowLogin }) => {
 
+    const [loading, setLoading] = useState(false);
     const { url, setToken } = useContext(StoreContext)
     const [currentState, setCurrentState] = useState("Sign In")
     const [data, setData] = useState({
@@ -23,6 +24,7 @@ const LoginPopup = ({ setShowLogin }) => {
     }
 
     const onLogin = async (e) => {
+        setLoading(true);
         e.preventDefault();
         let newUrl = url;
         if (currentState === "Sign Up") {
@@ -36,7 +38,9 @@ const LoginPopup = ({ setShowLogin }) => {
             setToken(response.data.token);
             localStorage.setItem("token", response.data.token);
             setShowLogin(false);
-        }else{
+            setLoading(false);
+        } else {
+            setLoading(false);
             alert(response.data.message);
         }
     }
@@ -59,7 +63,9 @@ const LoginPopup = ({ setShowLogin }) => {
                     <input type="checkbox" required />
                     <p>By continuing I agree to the terms of conditions & privacy policy</p>
                 </div>
-                <button type='submit'>{currentState === "Sign Up" ? "Create Account" : "Sign In"}</button>
+                <button type='submit'>{currentState === "Sign Up"
+                    ? (!loading) ? "Create Account" : "Creating Account..."
+                    : (!loading) ? "Sign In" : "Signing In..."}</button>
                 {currentState === "Sign Up"
                     ? <p>Already have an account? <span onClick={() => setCurrentState("Sign In")}>Sign-In here</span></p>
                     : <p>Create a new account? <span onClick={() => setCurrentState("Sign Up")}>Register here</span></p>}

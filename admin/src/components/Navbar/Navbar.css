@@ -6,11 +6,11 @@
 }
 
 .navbar .logo {
-  width: max(10%, 80px);
+  width: max(20%, 200px);
   cursor: pointer;
 }
 
-.navbar .profile{
-    width: 40px;
-    cursor: pointer;
+.navbar .profile {
+  width: 40px;
+  cursor: pointer;
 }

@@ -39,6 +39,11 @@
   background-color: white;
   border-radius: 50px;
   font-size: max(1vw, 13px);
+  cursor: pointer;
+}
+
+.header-contents button:hover {
+  color: #ef9215;
 }
 
 @media (max-width: 1050px) {
@@ -48,9 +53,9 @@
 }
 
 @media (max-width: 750px) {
-.header {
-  height: 40vw;
-}
+  .header {
+    height: 40vw;
+  }
   .header-contents {
     max-width: 55%;
   }

@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import './PlaceOrder.css'
 import { StoreContext } from '../../context/StoreContext'
 import { useNavigate } from 'react-router-dom'
 
 const PlaceOrder = () => {
 
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
-    const { getTotalCartValue, token, food_list, cartItems, url } = React.useContext(StoreContext);
+    const { getTotalCartValue, token, food_list, cartItems, url } = useContext(StoreContext);
 
-    const [data, setData] = React.useState({
+    const [data, setData] = useState({
         firstName: "",
         lastName: "",
         email: "",
@@ -28,6 +29,8 @@ const PlaceOrder = () => {
 
     const placeOrder = async (event) => {
         event.preventDefault();
+        setLoading(true);
+
         let orderItems = [];
         food_list.map((item) => {
             if (cartItems[item._id] > 0) {
@@ -57,9 +60,11 @@ const PlaceOrder = () => {
             const result = await response.json();
 
             if (result.success) {
+                setLoading(false);
                 const { session_url } = result;
                 window.location.replace(session_url);
             } else {
+                setLoading(false);
                 alert(result.message);
             }
 
@@ -79,6 +84,7 @@ const PlaceOrder = () => {
               alert(response.data.message);
           } */
         } catch (error) {
+            setLoading(false);
             console.error(error)
         }
     }
@@ -132,7 +138,7 @@ const PlaceOrder = () => {
                             <b><span>&#8377;</span> {2 + getTotalCartValue()}</b>
                         </div>
                     </div>
-                    <button type='submit'>Proceed to payment</button>
+                    <button type='submit'>{!loading ? "Proceed to payment" : "Proceeding..."}</button>
                 </div>
             </div>
         </form >
