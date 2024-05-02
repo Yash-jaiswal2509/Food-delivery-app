@@ -1,7 +1,6 @@
 import React, { useEffect, useContext, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { StoreContext } from "../../context/StoreContext";
-import axios from 'axios';
 
 const Verify = () => {
     const { url } = useContext(StoreContext);
@@ -13,8 +12,20 @@ const Verify = () => {
 
     const verifyPayment = useCallback(async () => {
         try {
-            const response = await axios.post(`${url}/api/order/verify-order`, { success, orderId });
-            if (response.data.success) {
+            const response = await fetch(`${url}/api/order/verify-order`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ success, orderId })
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            if (data.success) {
                 if (window.location.pathname !== "/my-orders") {
                     navigate("/my-orders");
                 }
@@ -25,6 +36,9 @@ const Verify = () => {
             }
         } catch (error) {
             console.error('Failed to verify order:', error);
+            if (window.location.pathname !== "/error") {
+                navigate("/error");
+            }
         }
     }, [url, success, orderId, navigate]);
 
